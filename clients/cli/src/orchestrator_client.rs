@@ -18,7 +18,7 @@ impl OrchestratorClient {
     pub fn new(environment: config::Environment) -> Self {
         Self {
             client: ClientBuilder::new()
-                .timeout(Duration::from_millis(1000))
+                .timeout(Duration::from_millis(100000))
                 .build()
                 .expect("Failed to create HTTP client"),
             base_url: environment.orchestrator_url(),
@@ -115,7 +115,7 @@ impl OrchestratorClient {
             .make_request("/tasks", "POST", &request)
             .await?
             .ok_or("No response received from get_proof_task")?;
-
+        
         Ok(response)
     }
 

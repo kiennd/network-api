@@ -24,6 +24,7 @@ async fn authenticated_proving(
     let public_input: u32 = proof_task.public_inputs[0] as u32;
 
     println!("Compiling guest program...");
+    println!(env!("CARGO_MANIFEST_DIR"));
     let elf_file_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("assets")
         .join("fib_input");
