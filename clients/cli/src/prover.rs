@@ -18,16 +18,7 @@ async fn authenticated_proving(
     let client = OrchestratorClient::new(environment.clone());
 
     println!("Fetching a task to prove from Nexus Orchestrator...");
-    let proof_task = match client.get_proof_task(node_id).await {
-        Ok(task) => {
-            println!("Success.");
-            task
-        },
-        Err(_) => {
-            println!("Using local inputs.");
-            return anonymous_proving();
-        },
-    };
+    let proof_task = client.get_proof_task(node_id).await?;
     println!("Received a task to prove from Nexus Orchestrator...");
 
     let public_input: u32 = proof_task.public_inputs[0] as u32;
